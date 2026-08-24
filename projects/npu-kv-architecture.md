@@ -93,8 +93,10 @@ Three things fall out of this:
 | split 85:43 | 33,501,237 | 33,501,237 | exact match |
 | delta | +0.70 % | +0.70 % | match |
 
-Raw logs: `results/raw/p0b_sec3d_{A,p3}.log`. Command:
-`./scripts/reproduce_portfolio_core.sh --mode core` (~12 min).
+Raw logs: `results/raw/p0b_sec3d_{A,p3}.log` · summary `p0b_sec3d_summary.csv`.
+`./scripts/reproduce_portfolio_core.sh --mode core` (~12 min) was then run **as written**
+and printed `[REPRODUCED]` for both points, with the same cycle counts as the manual
+runs — so the simulation is deterministic across invocations, not only within one.
 
 A prior pass had recorded this experiment's original invocation as lost. It was not:
 all eight §3-d sim configs were still on the lab host, together with the model json,
