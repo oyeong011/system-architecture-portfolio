@@ -90,7 +90,9 @@ HW-side literacy, not as a headline project.
    `not demonstrated` written where there is no evidence.
 2. **[APPLICATION_EVIDENCE.md](APPLICATION_EVIDENCE.md)** — every claim in this
    portfolio, its raw evidence file, and its verification status.
-3. Then either project README.
+3. **[PORTFOLIO_KO.md](PORTFOLIO_KO.md)** / [pdf/portfolio.pdf](pdf/portfolio.pdf) — the
+   Korean manuscript. 13 pages: a cover plus 12 content pages.
+4. Then either project README.
 
 ## Evidence policy
 

@@ -125,15 +125,22 @@ added so the same class of drift fails in `ctest` instead of in an experiment.
 ## Reproducibility
 
 ```bash
-./experiments/reproduce_core.sh --mode smoke   # ~4 s    clean build + 12 invariants + one run
-./experiments/reproduce_core.sh --mode core    # ~6 min  + Exp1 over 5 seeds + figures
-./experiments/reproduce_core.sh --mode full    # ~15 min + Exp2/3/4
+./experiments/reproduce_core.sh --mode smoke   # 3.6 s    clean build + 12 invariants + one run
+./experiments/reproduce_core.sh --mode core    # 1.2 min  + Exp1 over 5 seeds + figures
+./experiments/reproduce_core.sh --mode full    # + Exp2/3/4 (not timed end-to-end)
 ```
 
 Each mode rebuilds from scratch, runs `ctest`, prints the binary sha256 and git
 commit, regenerates traces from seeds, and writes raw CSVs plus a manifest
 (`results/manifests/exp1_multiseed.json`) recording generator args, seeds, and
 config sha256s.
+
+`--mode core` was executed from a cleared scratch directory and reproduced the
+committed `exp1_bursty_multiseed.csv` and `exp1_multiseed_summary.csv`
+**byte-for-byte** — so trace generation is stable across runs, not just the simulator.
+Running the command end-to-end (rather than the steps it wraps) is also what caught a
+wrong runtime figure in the README and two latent bugs in `--mode full`; both fixed in
+`0e5cd6d`.
 
 **12 invariants** (`ctest --test-dir build --output-on-failure`), including:
 L2P/P2L bijection, free+valid+invalid = total, per-channel free sums, overwrite
