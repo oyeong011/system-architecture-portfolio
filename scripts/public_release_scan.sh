@@ -8,7 +8,7 @@ HITS=0
 
 scan() {  # scan <label> <extended-regex>
   local out
-  out=$(git grep -nIE "$2" -- . 2>/dev/null | grep -v '^scripts/public_release_scan.sh' | head -20) || true
+  out=$(git grep -nIE "$2" -- . 2>/dev/null | grep -vE '^(scripts/public_release_scan.sh|PUBLIC_RELEASE_CHECKLIST.md):' | head -20) || true
   if [ -n "$out" ]; then
     echo "### $1"; echo "$out"; echo
     HITS=$((HITS + 1))
