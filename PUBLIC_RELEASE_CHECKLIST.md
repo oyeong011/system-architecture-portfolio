@@ -101,10 +101,15 @@ the numbers, and the reproduction commands.
 
 | Repo | Current visibility | Requested public? | Approved by owner? | Date |
 |---|---|---|---|---|
-| `queue-aware-ftl-simulator` | private | no | — | — |
-| `kv-asymmetry-npu` | private | no | — | — |
-| `onnxim-kv-instrumented` | private | no | — | — |
-| `system-architecture-portfolio` (this) | local only | no | — | — |
+| `queue-aware-ftl-simulator` | **private** | no | **explicitly held — owner: "public 전환 = 아직 금지"** | 2026-08-25 |
+| `kv-asymmetry-npu` | **private** | no | **explicitly held** — lab host config/trace included | 2026-08-25 |
+| `onnxim-kv-instrumented` | **private** | no | not requested | — |
+| `system-architecture-portfolio` (this) | **private** (remote created 2026-08-25) | no | **explicitly held** | 2026-08-25 |
+
+Private pushes on 2026-08-25 were approved and completed; **no visibility was changed
+and none may be without a further explicit instruction.** Note that private→public on
+GitHub also exposes Actions history and enables forking, and anything that has been
+public in git history is not fully retractable by deleting the file later.
 | `kv-cache-consumer-gpu-bench` | already public | n/a | — | — |
 | `memory-hierarchy-experiment-framework` | already public | n/a | — | — |
 
