@@ -1,7 +1,7 @@
 # AI 가속기와 스토리지의 데이터 이동 병목 분석 및 시스템 최적화
 
 **권오영** · 숭실대학교 컴퓨터학부 (2027년 2월 졸업 예정)
-· 지원 직무: SK하이닉스 Solution SW — AI Memory / System Software
+· 지원 분야: SK하이닉스 **SYSTEM SW** — AI 메모리/스토리지 시스템 소프트웨어
 
 > CPU·GPU·NPU·SSD에서 데이터가 **어떤 형식으로 저장되고 어떤 경로로 이동하는지**가
 > 시스템 성능을 어떻게 제한하는지 측정하고, HW/SW 경계에서 병목을 검증하고
@@ -76,7 +76,7 @@ Verilog RV32I single-cycle CPU가 직접 작성한 testbench를 통과(COSE222).
 
 ## 읽는 순서
 
-1. **[JD_TRACEABILITY_MATRIX.md](JD_TRACEABILITY_MATRIX.md)** — Solution SW 요구역량을
+1. **[JD_TRACEABILITY_MATRIX.md](JD_TRACEABILITY_MATRIX.md)** — SYSTEM SW 요구역량을
    구체 파일과 구체 측정치에 연결. 근거 없는 역량은 `not demonstrated`로 표기.
 2. **[APPLICATION_EVIDENCE.md](APPLICATION_EVIDENCE.md)** — 이 포트폴리오의 모든 주장,
    raw 증거 파일, 검증 상태.

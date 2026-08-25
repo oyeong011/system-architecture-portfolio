@@ -1,7 +1,7 @@
 # Data Movement–Aware System Architecture for AI Accelerators and Storage
 
 **Oyeong Gwon** · Soongsil University, School of Computer Science (BS expected Feb 2027)
-· Target role: SK hynix Solution SW — AI Memory / System Software
+· Target track: SK hynix **SYSTEM SW** — AI memory / storage systems software
 
 > I measure how the way data is *stored* and *moved* limits system performance —
 > in an NPU's KV-cache path and in an SSD's host-queue-to-NAND path — by
@@ -87,7 +87,7 @@ HW-side literacy, not as a headline project.
 
 ## How to read this portfolio
 
-1. **[JD_TRACEABILITY_MATRIX.md](JD_TRACEABILITY_MATRIX.md)** — every Solution SW
+1. **[JD_TRACEABILITY_MATRIX.md](JD_TRACEABILITY_MATRIX.md)** — every SYSTEM SW
    competency mapped to a specific file and a specific measurement, with
    `not demonstrated` written where there is no evidence.
 2. **[APPLICATION_EVIDENCE.md](APPLICATION_EVIDENCE.md)** — every claim in this
