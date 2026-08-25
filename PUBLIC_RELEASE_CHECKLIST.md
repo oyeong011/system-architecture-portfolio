@@ -57,7 +57,7 @@ protecting defeats itself. The scanner's regexes live in `scripts/public_release
 |---|---|---|---|
 | `system-architecture-portfolio` | `d47fbb8` | **CLEAN** | none |
 | `queue-aware-ftl-simulator` | `5d7c4d4` | 1 category | 6 trace CSVs, 5.5–89 MB, tracked in git — **resolved by the snapshot below** |
-| `queue-aware-ftl-simulator-public` (snapshot) | `d21a0ec` | **CLEAN** | none — 516 KB working tree, 796 KB `.git` |
+| [`queue-aware-ftl-simulator-public`](https://github.com/oyeong011/queue-aware-ftl-simulator-public) (snapshot, **now PUBLIC**) | `b6a30b6` | **CLEAN** | none — 972 KB clone |
 | `kv-asymmetry-npu` | `5b93805` | 1 category | 11 references to the lab simulator host's alias and its internal directory layout |
 
 Explicitly checked and **not** found in any repo: API keys, GitHub/HF tokens, private

@@ -259,7 +259,26 @@ bit-exact 재현**, queue depth 상한, critical 압력에서 전진 보장, 잘
 - **재현성 도구** — manifest(seed·인자·config sha256), `reproduce_core.sh`
   (smoke/core/full), 시뮬레이터 바이너리 provenance 로깅
 
-# 12. 한계와 향후 연구
+# 12. 저장소와 접근
+
+| 항목 | 상태 |
+|---|---|
+| **Queue-Aware FTL Simulator** | **공개** — `github.com/oyeong011/queue-aware-ftl-simulator-public` |
+| **포트폴리오 허브** | 공개 — `github.com/oyeong011/system-architecture-portfolio` |
+| NPU KV Asymmetry (`kv-asymmetry-npu`, `onnxim-kv-instrumented`) | **private — 요청 시 공유** |
+| KV-cache Consumer GPU Benchmark | 공개 — `github.com/oyeong011/kv-cache-consumer-gpu-bench` |
+| Memory Hierarchy Experiment Framework | 공개 — `github.com/oyeong011/memory-hierarchy-experiment-framework` |
+
+NPU 저장소가 private인 이유는 연구실 공용 시뮬레이터 호스트 환경에서 수행했고, 연구실이
+먼저 발표하고 싶어할 수 있는 negative result와 신규 관찰을 포함하기 때문이다. 그 산출물
+자체 — 서사, 모든 수치, raw 증거 위치, 정확한 재현 명령 — 은 이 문서와 포트폴리오 허브에
+빠짐없이 기록돼 있으며, 저장소는 요청 시 공유한다.
+
+FTL 공개본은 워크로드 trace(약 390 MB)를 추적하지 않는다. trace는 manifest에 기록된
+seed·인자에서 재생성되며, 공개본만 clone해 `--mode core`를 돌리면 이 문서의 모든 수치가
+바이트 단위로 재생성된다(검증 완료).
+
+# 13. 한계와 향후 연구
 
 **정직하게 적는 한계**
 

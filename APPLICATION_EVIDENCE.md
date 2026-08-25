@@ -37,7 +37,7 @@ rerun) · `documented-not-rerun` (recorded in a document, raw file not re-checke
 | hot/cold locality lowers WAF (1.02 vs 1.91) | queue-aware-ftl-simulator | `46fa966` | `results/processed/exp4_locality.csv` | `--mode full` | **verified-current, caveated** — not a matched A/B (hot_cold is 50/50 R/W vs pure-write baseline); part of the gap is write count |
 | 12 invariants pass, including bit-exact per-seed determinism | queue-aware-ftl-simulator | `a657bcc` | `ctest` output; `tests/test_invariants.cc` | `ctest --test-dir build --output-on-failure` | **verified-current** |
 | Clean-build reproduction in 3.6 s (smoke), 1.2 min (core) | queue-aware-ftl-simulator | `5d7c4d4` | timed runs this session | `--mode smoke` / `--mode core` | **verified-current** |
-| The public snapshot reproduces every published number with **no trace files tracked** | queue-aware-ftl-simulator-public | `d21a0ec` | standalone checkout, cleared scratch: raw + summary CSVs byte-identical to committed, git tree clean after the run | `./experiments/reproduce_core.sh --mode core` | **verified-current** |
+| The public snapshot reproduces every published number with **no trace files tracked** | [queue-aware-ftl-simulator-public](https://github.com/oyeong011/queue-aware-ftl-simulator-public) | `b6a30b6` | standalone checkout, cleared scratch: raw + summary CSVs byte-identical to committed, git tree clean after the run | `./experiments/reproduce_core.sh --mode core` | **verified-current** |
 | Any statement about physical NVMe/SATA SSD performance | — | — | none — no NVMe device in this setup | — | **not claimed anywhere** |
 
 ## GPU — KV-cache consumer benchmark

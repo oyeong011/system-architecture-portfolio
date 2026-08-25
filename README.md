@@ -51,8 +51,8 @@ upstream ONNXim**.
 
 ### 2. Queue-Aware FTL Simulator
 **[projects/ssd-ftl-simulator.md](projects/ssd-ftl-simulator.md)** ·
-`queue-aware-ftl-simulator-public` — code, tests, configs, processed results, manifests
-(the development repository with raw traces stays private)
+[`queue-aware-ftl-simulator-public`](https://github.com/oyeong011/queue-aware-ftl-simulator-public) **(public)** — code, tests, configs,
+processed results, figures, manifests (the development repository with raw traces stays private)
 
 Wrote a page-level FTL + per-channel NAND simulator from scratch in C++17 to ask
 whether **GC that watches the host queue** can cut GC-induced tail latency without
@@ -93,7 +93,7 @@ HW-side literacy, not as a headline project.
 2. **[APPLICATION_EVIDENCE.md](APPLICATION_EVIDENCE.md)** — every claim in this
    portfolio, its raw evidence file, and its verification status.
 3. **[PORTFOLIO_KO.md](PORTFOLIO_KO.md)** / [pdf/portfolio.pdf](pdf/portfolio.pdf) — the
-   Korean manuscript. 13 pages: a cover plus 12 content pages.
+   Korean manuscript. 14 pages: a cover plus 13 content pages.
 4. Then either project README.
 
 ## Why some repositories are private
@@ -104,8 +104,9 @@ first. Those repositories therefore stay private and are available on request; w
 produced — the narrative, every number, the raw-evidence pointers, and the exact
 reproduction commands — is documented here in full.
 
-The SSD simulator is entirely my own work and is published as a code snapshot. Its
-development repository stays private only because it tracks ~390 MB of workload traces;
+The SSD simulator is entirely my own work and is published in full at
+[`queue-aware-ftl-simulator-public`](https://github.com/oyeong011/queue-aware-ftl-simulator-public). Its development repository stays private
+only because it tracks ~390 MB of workload traces;
 those traces are regenerable from the seeds and arguments recorded in the published
 manifests, so nothing needed to reproduce the results is missing from the public copy.
 

@@ -43,8 +43,8 @@ payload가 아니라 양자화 장부가 다음 병목 후보다. 작업 중 ups
 
 ### 2. Queue-Aware FTL Simulator
 [projects/ssd-ftl-simulator.md](projects/ssd-ftl-simulator.md) ·
-`queue-aware-ftl-simulator-public` — 코드·테스트·config·processed 결과·manifest
-(raw trace를 포함한 개발 저장소는 private 유지)
+[`queue-aware-ftl-simulator-public`](https://github.com/oyeong011/queue-aware-ftl-simulator-public) **(public)** — 코드·테스트·config·
+processed 결과·figure·manifest (raw trace를 포함한 개발 저장소는 private 유지)
 
 **host queue 상태를 보는 GC**가 WAF를 과도하게 키우지 않고 GC 유발 tail latency를
 낮출 수 있는지 묻기 위해 page-level FTL + 채널별 NAND 시뮬레이터를 C++17로 직접
@@ -90,7 +90,8 @@ NPU 작업은 연구실 환경의 공용 시뮬레이터 호스트에서 수행�
 두고 요청 시 공유하며, 그 산출물 — 서사·모든 수치·raw 증거 위치·정확한 재현 명령 — 은
 이 문서에 전부 기록돼 있다.
 
-SSD 시뮬레이터는 전적으로 본인 작업이며 코드 스냅샷으로 공개한다. 개발 저장소가
+SSD 시뮬레이터는 전적으로 본인 작업이며 [`queue-aware-ftl-simulator-public`](https://github.com/oyeong011/queue-aware-ftl-simulator-public)에
+전부 공개돼 있다. 개발 저장소가
 private인 이유는 약 390 MB의 워크로드 trace를 추적하기 때문이며, 그 trace는 공개된
 manifest의 seed·인자로 재생성되므로 결과 재현에 필요한 것은 공개본에 빠짐없이 들어 있다.
 
