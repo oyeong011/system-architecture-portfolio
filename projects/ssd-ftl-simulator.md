@@ -1,6 +1,12 @@
 # Queue-Aware FTL Simulator
 
-Repo: [`oyeong011/queue-aware-ftl-simulator`](https://github.com/oyeong011/queue-aware-ftl-simulator) (private) · commit `a657bcc` · C++17 / CMake / CTest / Python
+Repo: **`queue-aware-ftl-simulator-public`** — code, tests, configs, processed results,
+figures, and manifests · C++17 / CMake / CTest / Python
+
+The development repository (`queue-aware-ftl-simulator` @ `5d7c4d4`) stays private
+because it tracks ~390 MB of raw workload traces. Those traces are regenerable from the
+seeds and arguments in `results/manifests/exp1_multiseed.json`, which the public snapshot
+carries — so the published copy reproduces every number here.
 
 ## Problem
 

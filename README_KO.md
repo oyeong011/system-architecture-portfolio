@@ -30,7 +30,8 @@
 
 ### 1. NPU KV Asymmetry — 계측 확장한 ONNXim
 [projects/npu-kv-architecture.md](projects/npu-kv-architecture.md) ·
-`kv-asymmetry-npu`, `onnxim-kv-instrumented` (private)
+저장소: **private — 요청 시 공유** · 재현 상태: **검증 완료**
+(shared 기준선 33,267,145 cycles · split 85:43 33,501,237 cycles, +0.70 %)
 
 양자화 LLM에서 K와 V의 dequant 자원 수요 차이가 **dequant 엔진 분할**을 정당화하는지
 물었다. ONNXim에 dequant 비용 모델·K/V 분리 카운터·provenance 로깅을 추가하고
@@ -42,7 +43,8 @@ payload가 아니라 양자화 장부가 다음 병목 후보다. 작업 중 ups
 
 ### 2. Queue-Aware FTL Simulator
 [projects/ssd-ftl-simulator.md](projects/ssd-ftl-simulator.md) ·
-[`queue-aware-ftl-simulator`](https://github.com/oyeong011/queue-aware-ftl-simulator) (private)
+`queue-aware-ftl-simulator-public` — 코드·테스트·config·processed 결과·manifest
+(raw trace를 포함한 개발 저장소는 private 유지)
 
 **host queue 상태를 보는 GC**가 WAF를 과도하게 키우지 않고 GC 유발 tail latency를
 낮출 수 있는지 묻기 위해 page-level FTL + 채널별 NAND 시뮬레이터를 C++17로 직접
@@ -80,6 +82,17 @@ Verilog RV32I single-cycle CPU가 직접 작성한 testbench를 통과(COSE222).
    raw 증거 파일, 검증 상태.
 3. **[PORTFOLIO_KO.md](PORTFOLIO_KO.md)** / [pdf/portfolio.pdf](pdf/portfolio.pdf) — 국문 원고.
 4. 이후 개별 프로젝트 문서.
+
+## 일부 저장소가 private인 이유
+
+NPU 작업은 연구실 환경의 공용 시뮬레이터 호스트에서 수행했고, 연구실이 먼저 발표하고
+싶어할 수 있는 negative result와 신규 관찰을 포함한다. 따라서 해당 저장소는 private으로
+두고 요청 시 공유하며, 그 산출물 — 서사·모든 수치·raw 증거 위치·정확한 재현 명령 — 은
+이 문서에 전부 기록돼 있다.
+
+SSD 시뮬레이터는 전적으로 본인 작업이며 코드 스냅샷으로 공개한다. 개발 저장소가
+private인 이유는 약 390 MB의 워크로드 trace를 추적하기 때문이며, 그 trace는 공개된
+manifest의 seed·인자로 재생성되므로 결과 재현에 필요한 것은 공개본에 빠짐없이 들어 있다.
 
 ## 증거 원칙
 

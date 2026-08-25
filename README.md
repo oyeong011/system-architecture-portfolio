@@ -35,7 +35,8 @@ the simulator until it can measure it, then let the measurement decide.
 
 ### 1. KV Asymmetry on an NPU — instrumented ONNXim
 **[projects/npu-kv-architecture.md](projects/npu-kv-architecture.md)** ·
-`kv-asymmetry-npu`, `onnxim-kv-instrumented` (private)
+Repositories: **private — available on request** · Reproducibility: **verified**
+(shared baseline 33,267,145 cycles · split 85:43 33,501,237 cycles, +0.70 %)
 
 Asked whether K and V in a quantized LLM KV-cache have different enough resource
 demands to justify **splitting the dequantization engine** into separate K and V
@@ -50,7 +51,8 @@ upstream ONNXim**.
 
 ### 2. Queue-Aware FTL Simulator
 **[projects/ssd-ftl-simulator.md](projects/ssd-ftl-simulator.md)** ·
-[`queue-aware-ftl-simulator`](https://github.com/oyeong011/queue-aware-ftl-simulator) (private)
+`queue-aware-ftl-simulator-public` — code, tests, configs, processed results, manifests
+(the development repository with raw traces stays private)
 
 Wrote a page-level FTL + per-channel NAND simulator from scratch in C++17 to ask
 whether **GC that watches the host queue** can cut GC-induced tail latency without
@@ -93,6 +95,19 @@ HW-side literacy, not as a headline project.
 3. **[PORTFOLIO_KO.md](PORTFOLIO_KO.md)** / [pdf/portfolio.pdf](pdf/portfolio.pdf) — the
    Korean manuscript. 13 pages: a cover plus 12 content pages.
 4. Then either project README.
+
+## Why some repositories are private
+
+The NPU work was carried out in a research-group environment, on a shared simulator host,
+and it includes negative results and a new observation the group may want to publish
+first. Those repositories therefore stay private and are available on request; what they
+produced — the narrative, every number, the raw-evidence pointers, and the exact
+reproduction commands — is documented here in full.
+
+The SSD simulator is entirely my own work and is published as a code snapshot. Its
+development repository stays private only because it tracks ~390 MB of workload traces;
+those traces are regenerable from the seeds and arguments recorded in the published
+manifests, so nothing needed to reproduce the results is missing from the public copy.
 
 ## Evidence policy
 

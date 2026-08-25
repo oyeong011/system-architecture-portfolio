@@ -1,9 +1,21 @@
 # KV Asymmetry on an NPU — Instrumented ONNXim
 
-Repos: `kv-asymmetry-npu` (private, branch `portfolio-hardening`) ·
-`onnxim-kv-instrumented` (private, branch `phase0b-dequant` @ `bd1f344`) ·
-fork of [PSAL-POSTECH/ONNXim](https://github.com/PSAL-POSTECH/ONNXim) with
-`fix/kv-head-idx-gqa-mapping` @ `69e6189`
+**Repositories: private — available on request.** The work was done in a research-group
+environment on a shared simulator host; the repositories carry lab configuration and
+research material, so they are shared by invitation rather than published. Everything
+needed to evaluate the work is in this document.
+
+| | |
+|---|---|
+| Reproducibility status | **Verified** — both headline points rerun and matched exactly |
+| Shared baseline (T = 128:128) | **33,267,145 cycles** |
+| Split 85:43 (= demand ratio) | **33,501,237 cycles** (+0.70 %) |
+| Reproduction command | `./scripts/reproduce_portfolio_core.sh --mode core` (~12 min) |
+| Upstream contribution | ONNXim fork, branch `fix/kv-head-idx-gqa-mapping` @ `69e6189` |
+
+Internal references: `kv-asymmetry-npu` @ `5b93805` (branch `portfolio-hardening`),
+`onnxim-kv-instrumented` @ `bd1f344` (branch `phase0b-dequant`), fork of
+[PSAL-POSTECH/ONNXim](https://github.com/PSAL-POSTECH/ONNXim).
 
 ## Problem
 

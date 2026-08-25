@@ -15,6 +15,10 @@ items below and exits non-zero on any hit. Run it per repository:
 ./scripts/public_release_scan.sh /path/to/repo
 ```
 
+**This file is written to be publishable.** It names *categories* of finding, never the
+actual host alias, path, or credential pattern found — a checklist that quotes what it is
+protecting defeats itself. The scanner's regexes live in `scripts/public_release_scan.sh`.
+
 | # | Check | Why |
 |---|---|---|
 | 1 | API keys (`sk-`, `AKIA`, `AIza`, `xox[baprs]-`) | credential leak |
@@ -22,7 +26,7 @@ items below and exits non-zero on any hit. Run it per repository:
 | 3 | Hugging Face tokens (`hf_`) | account compromise |
 | 4 | SSH private keys (`BEGIN * PRIVATE KEY`) | host compromise |
 | 5 | Absolute home paths (`/home/<user>/`, `C:\Users\`) | leaks username + machine layout |
-| 6 | Hard-coded internal hostnames / IPs (e.g. the lab simulator host) | exposes internal infrastructure |
+| 6 | Hard-coded internal hostnames / IPs | exposes internal infrastructure |
 | 7 | `.env`, `*.pem`, `*.key`, `credentials*` files | credential leak |
 | 8 | Files > 25 MB | repo bloat; also often accidental data dumps |
 | 9 | Unpublished paper PDFs / proprietary datasets | licensing and embargo |
@@ -52,12 +56,40 @@ items below and exits non-zero on any hit. Run it per repository:
 | Repo | Commit | Result | Findings |
 |---|---|---|---|
 | `system-architecture-portfolio` | `d47fbb8` | **CLEAN** | none |
-| `queue-aware-ftl-simulator` | `5d7c4d4` | 1 category | 5 trace CSVs, 64–87 MB each, tracked in git |
-| `kv-asymmetry-npu` | `5b93805` | 1 category | 11 references to the lab host alias `npu-sim` and `~/research/npu-sim/...` paths |
+| `queue-aware-ftl-simulator` | `5d7c4d4` | 1 category | 6 trace CSVs, 5.5–89 MB, tracked in git — **resolved by the snapshot below** |
+| `queue-aware-ftl-simulator-public` (snapshot) | `d21a0ec` | **CLEAN** | none — 516 KB working tree, 796 KB `.git` |
+| `kv-asymmetry-npu` | `5b93805` | 1 category | 11 references to the lab simulator host's alias and its internal directory layout |
 
 Explicitly checked and **not** found in any repo: API keys, GitHub/HF tokens, private
 keys, credential-shaped files, model weights, binaries, archives, real IP addresses,
 `/home/<username>/` absolute paths.
+
+### Snapshot verification — 2026-08-25
+
+`queue-aware-ftl-simulator-public` was built as a standalone repository (fresh
+`git init`, no remote) containing no trace files at all, and then verified **from inside
+that checkout**, not as a subset of the parent working tree:
+
+```
+./experiments/reproduce_core.sh --mode core     # scratch dir cleared first
+  clean build OK · ctest 12/12 OK
+  p99 −4.35 % (sd 2.10) · GC stall −12.95 % (sd 0.23) · WAF +4.15 % (sd 0.10)
+  results/raw/exp1_bursty_multiseed.csv        byte-identical to committed
+  results/processed/exp1_multiseed_summary.csv byte-identical to committed
+  git status after the run: clean
+```
+
+So the snapshot regenerates ~390 MB of input from the seeds in its own manifest and
+reproduces every published number without carrying a single trace file. That is the
+claim the exclusion rests on, and it is tested rather than asserted.
+
+All six traces are excluded, including the 5.5 MB `exp2_mix70r30w_seed0.csv` — keeping
+one while dropping five would read as an oversight rather than a decision. The 3.7 KB
+`exp1_bursty_multiseed.csv` **is** kept: it is a metric-row CSV, not a trace, and it is
+the raw evidence behind the headline claim.
+
+No `LICENSE` file is included. Publishing portfolio code is not open-sourcing it —
+without a license, copyright stays with the author and no reuse rights are granted.
 
 ### What each finding actually is
 
@@ -73,7 +105,7 @@ keys, credential-shaped files, model weights, binaries, archives, real IP addres
 
 | Item | Where | Action | Blocks which repo |
 |---|---|---|---|
-| Lab host alias `npu-sim`, `~/research/npu-sim/...` paths | `audit/*.md`, `reports/*.md`, `sim/scripts/*.py` (11 hits) | replace with "lab simulator host" / repo-relative paths | `kv-asymmetry-npu` |
+| Lab simulator host alias and internal absolute paths | `audit/*.md`, `reports/*.md`, `sim/scripts/*.py` (11 hits) | replace with a generic "lab simulator host" and repo-relative paths | `kv-asymmetry-npu` |
 | 5 trace CSVs, 64–87 MB | `queue-aware-ftl-simulator/results/raw/` | publish a snapshot without them (regenerable from the manifest); do **not** rewrite history in the private repo | `queue-aware-ftl-simulator` |
 | Docker image tags/ids | NPU reproduce scripts | keep — local build tags, meaningful only alongside the shipped Dockerfile | — |
 
