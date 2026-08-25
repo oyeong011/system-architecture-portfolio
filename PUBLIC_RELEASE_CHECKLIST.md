@@ -1,10 +1,17 @@
 # Public Release Checklist
 
-**Status: NOT RELEASED. No repository has been made public as part of this work.**
+**Status (2026-08-25): two repositories released, three held private.**
 
-`kv-asymmetry-npu`, `onnxim-kv-instrumented`, and `queue-aware-ftl-simulator` are
-private and stay private until the owner explicitly approves each one. This file is
-the pre-flight check to run *before* that decision, not a record that it was made.
+Released after the scans and verifications recorded below:
+`system-architecture-portfolio` (this hub) and `queue-aware-ftl-simulator-public`.
+
+Held private, indefinitely: `kv-asymmetry-npu`, `onnxim-kv-instrumented` (research-group
+environment — releasing them is the group's decision, not a portfolio one), and
+`queue-aware-ftl-simulator` (the FTL development history, superseded for public purposes
+by the snapshot).
+
+This file stays as the pre-flight check for any *future* release, and as the record of
+how these two were cleared.
 
 ## Automated scan
 
@@ -133,15 +140,21 @@ the numbers, and the reproduction commands.
 
 | Repo | Current visibility | Requested public? | Approved by owner? | Date |
 |---|---|---|---|---|
-| `queue-aware-ftl-simulator` | **private** | no | **explicitly held — owner: "public 전환 = 아직 금지"** | 2026-08-25 |
-| `kv-asymmetry-npu` | **private** | no | **explicitly held** — lab host config/trace included | 2026-08-25 |
-| `onnxim-kv-instrumented` | **private** | no | not requested | — |
-| `system-architecture-portfolio` (this) | **private** (remote created 2026-08-25) | no | **explicitly held** | 2026-08-25 |
+| `queue-aware-ftl-simulator-public` | **PUBLIC** | yes | **approved & released** — snapshot verified standalone, scan CLEAN | 2026-08-25 |
+| `system-architecture-portfolio` (this) | **PUBLIC** | yes | **approved & released** — scan CLEAN, no Actions history existed | 2026-08-25 |
+| `queue-aware-ftl-simulator` | **private** | no | **held** — development history; the snapshot serves the public purpose | 2026-08-25 |
+| `kv-asymmetry-npu` | **private** | no | **held** — research-group environment; group's decision | 2026-08-25 |
+| `onnxim-kv-instrumented` | **private** | no | **held** — same | 2026-08-25 |
 
-Private pushes on 2026-08-25 were approved and completed; **no visibility was changed
-and none may be without a further explicit instruction.** Note that private→public on
-GitHub also exposes Actions history and enables forking, and anything that has been
-public in git history is not fully retractable by deleting the file later.
+Release order was deliberate: the FTL snapshot went public first so the hub could link a
+URL that actually resolves, then the hub was re-scanned and only then flipped — the last
+irreversible step. Anonymous (unauthenticated) checks after the flip confirmed HTTP 200
+for both public repos and HTTP 404 for all three private ones.
+
+Standing note for future releases: private→public also exposes any Actions history and
+enables forking, and anything that has been public in git history is not fully
+retractable by deleting the file afterwards. This hub had 0 workflows and 0 runs at the
+time of release, so nothing beyond the 18 tracked files was exposed.
 | `kv-cache-consumer-gpu-bench` | already public | n/a | — | — |
 | `memory-hierarchy-experiment-framework` | already public | n/a | — | — |
 
