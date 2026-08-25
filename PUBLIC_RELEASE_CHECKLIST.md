@@ -45,14 +45,57 @@ items below and exits non-zero on any hit. Run it per repository:
       shared by invite, or an exported PDF, gives the reviewer what they need without
       a public release. Prefer this.
 
+## Scan results — 2026-08-25
+
+`scripts/public_release_scan.sh` run against all three repositories at their pushed commits.
+
+| Repo | Commit | Result | Findings |
+|---|---|---|---|
+| `system-architecture-portfolio` | `d47fbb8` | **CLEAN** | none |
+| `queue-aware-ftl-simulator` | `5d7c4d4` | 1 category | 5 trace CSVs, 64–87 MB each, tracked in git |
+| `kv-asymmetry-npu` | `5b93805` | 1 category | 11 references to the lab host alias `npu-sim` and `~/research/npu-sim/...` paths |
+
+Explicitly checked and **not** found in any repo: API keys, GitHub/HF tokens, private
+keys, credential-shaped files, model weights, binaries, archives, real IP addresses,
+`/home/<username>/` absolute paths.
+
+### What each finding actually is
+
+- **FTL trace CSVs (~388 MB total).** Not sensitive — synthetic workload traces. The
+  problem is bloat: they are regenerable from six values recorded in
+  `results/manifests/exp1_multiseed.json`, so a public snapshot should not carry them.
+  They must **not** be removed by rewriting history in the private repo (§11).
+- **NPU host references.** No IP address and no username leaks; what leaks is the lab's
+  internal host alias and directory layout. Low severity, but it is lab infrastructure
+  detail, not the applicant's to publish.
+
 ## Known items to fix before any release
 
-| Item | Where | Action |
-|---|---|---|
-| Absolute paths `/home/oy/...` | `experiments/p0b_sec3d/run.sh` manifests, some audit docs | replace with repo-relative paths |
-| Internal host `203.253.25.244` / `npu-sim` | audit docs, STATUS files | replace with a generic "lab simulator host" |
-| 60–85 MB trace CSVs | `queue-aware-ftl-simulator/results/raw/exp1_bursty_seed0.csv` | traces are regenerable from seed + manifest; drop from a public snapshot rather than rewriting history in the private repo |
-| Docker image names/ids | NPU reproduce scripts | fine to keep — they are local build tags, but the Dockerfile must ship with them to be meaningful |
+| Item | Where | Action | Blocks which repo |
+|---|---|---|---|
+| Lab host alias `npu-sim`, `~/research/npu-sim/...` paths | `audit/*.md`, `reports/*.md`, `sim/scripts/*.py` (11 hits) | replace with "lab simulator host" / repo-relative paths | `kv-asymmetry-npu` |
+| 5 trace CSVs, 64–87 MB | `queue-aware-ftl-simulator/results/raw/` | publish a snapshot without them (regenerable from the manifest); do **not** rewrite history in the private repo | `queue-aware-ftl-simulator` |
+| Docker image tags/ids | NPU reproduce scripts | keep — local build tags, meaningful only alongside the shipped Dockerfile | — |
+
+## Recommended disclosure order
+
+Portfolio review does not require publishing everything. Narrowest sufficient path:
+
+1. **`system-architecture-portfolio` first.** Scan is clean, it is the document a reviewer
+   actually reads, and it links out rather than containing research artifacts. Publishing
+   only this exposes nothing from the lab.
+2. **`queue-aware-ftl-simulator` second, as a fresh snapshot.** It is entirely the
+   applicant's own work with no lab dependency; the only blocker is size, and a snapshot
+   without the trace CSVs clears it. This is the repo that best shows C++/testing/
+   experiment-design ability.
+3. **`kv-asymmetry-npu` — do not publish.** Beyond the host references, it carries lab
+   research direction, negative results, and a new observation the group may want to
+   publish first. Share by private invite if a reviewer asks. This is a research-group
+   decision, not a portfolio one.
+
+For a reviewer who wants to see the NPU work without a public repo: the project card
+(`projects/npu-kv-architecture.md`) and `pdf/portfolio.pdf` carry the full narrative,
+the numbers, and the reproduction commands.
 
 ## Release decision log
 
