@@ -43,10 +43,13 @@ demands to justify **splitting the dequantization engine** into separate K and V
 units. Added a dequant model, K/V-separated counters, and provenance logging to
 ONNXim; swept allocation ratios; and **rejected my own proposal** — a correctly
 sized split lands within 0.7–1.2 % of a shared engine, which does not pay for the
-hardware. The experiments then surfaced something I had not been looking for: at
-INT4 weights and batch 64, **KV metadata traffic (26.3 %) exceeds weight traffic
-(21.3 %)** — quantization metadata, not payload, becomes the next thing worth
-attacking. Also found and reported a **GQA/MHA `kv_head_idx` mapping bug in
+hardware. The experiments then surfaced a follow-on question I had not been looking
+for. From the **measured** FP16 / batch-16 traffic decomposition, a scaling-law
+projection estimates that at INT4 weights and batch 64 **KV metadata could account for
+26.3 % of modeled traffic against a projected 21.3 % weight share** — i.e. quantization
+metadata, not payload, may become the next thing worth attacking. **That INT4 / batch-64
+point was not simulated**; it is an analytical projection that generates a hypothesis,
+not a measured result. Also found and reported a **GQA/MHA `kv_head_idx` mapping bug in
 upstream ONNXim**.
 
 ### 2. Queue-Aware FTL Simulator

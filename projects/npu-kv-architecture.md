@@ -119,19 +119,28 @@ to the new value.
 
 ## Negative Result / New Observation
 
-The rejection is the headline, and the follow-on observation is the more interesting
-part: at **INT4 weights, batch 64**, DRAM traffic decomposes as
+The rejection is the headline. The follow-on is a hypothesis, and it is important to be
+exact about which half of it was measured.
 
-- weights **21.3 %**
-- KV payload **52.4 %**
-- **KV metadata 26.3 %**
+**Measured** (weight FP16, batch 16, per-layer, whole-batch — 436,207,616 /
+67,117,056 / 33,622,016 bytes):
 
-**Quantization metadata moves more bytes than the weights do.** Push quantization
-harder and finer-grained and this term grows, not shrinks — the bookkeeping that makes
-the payload small becomes the next bottleneck. That is a research question the original
-hypothesis was not even asking.
+| condition | weight | KV payload | KV metadata |
+|---|---:|---:|---:|
+| FP16, batch 16 — **simulated** | 81.2 % | 12.5 % | 6.3 % |
+| INT4, batch 64 — **analytical projection** | 21.3 % | 52.4 % | **26.3 %** |
 
-A second correction the data forced: my prior assumption that mode switches are rare
+**Projected**, by applying two scaling laws to that measured point (weight bytes are
+batch-invariant and linear in bit-width; KV bytes are linear in batch): at INT4 weights
+and batch 64, quantization metadata could move more bytes than the weights do. Push
+quantization harder and finer-grained and this term grows rather than shrinks — the
+bookkeeping that makes the payload small may become the next bottleneck.
+
+**The INT4 / batch-64 point was not simulated.** The second row is arithmetic extension
+of the first, not a measurement. It is a hypothesis-generating projection and a research
+question the original hypothesis was not asking — not a result.
+
+A second correction the measurements forced: my prior assumption that mode switches are rare
 (so a shared engine batches K and V work) is **wrong** — measured switch rate is 98.4 %
 of dequant events on llama3-8b, i.e. nearly every event alternates. The shared engine
 still wins, but not for the reason I assumed.
