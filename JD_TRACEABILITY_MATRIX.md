@@ -22,7 +22,7 @@ Verification statuses: `verified-current` (rerun now, raw log in-tree) ·
 
 | Competency | Project evidence | Specific file / code | Measured result | Limitation |
 |---|---|---|---|---|
-| **AI workload analysis** | KV Asymmetry on NPU | `audit/p3_metadata_result.md`; DRAM traffic decomposition by weight / KV payload / KV metadata | At W-INT4, batch 64: weight 21.3 %, KV payload 52.4 %, **KV metadata 26.3 %** — metadata traffic exceeds weight traffic | `verified-historical`; one model family, proxy layer counts |
+| **AI workload analysis** | KV Asymmetry on NPU | `audit/p3_metadata_result.md`; DRAM traffic decomposition by weight / KV payload / KV metadata | **Measured** at FP16, batch 16: weight 81.2 % / KV payload 12.5 % / KV metadata 6.3 %. A scaling-law **projection** to INT4, batch 64 gives 21.3 % / 52.4 % / **26.3 %**, i.e. metadata could exceed weight traffic | measured row `verified-historical`; **the INT4/batch-64 row is `ANALYTICAL` — that point was never simulated**; one model family, proxy layer counts |
 | | KV-cache GPU Benchmark | `run_eviction_bench.py`, `results/*.csv` | 75 % KV-byte reduction → 0.92× throughput (slower); peak memory *up* | Single model family; 5080 telemetry incomplete |
 | **Memory / data movement** | KV Asymmetry on NPU | `audit/p0b_result.md` §3-d 7-point allocation sweep | Optimal split = demand ratio; misallocation penalty is steep and asymmetric (+0.70 % at optimum → +158 % at worst point) | `verified-current` — shared baseline and 85:43 split both reran and matched exactly this session |
 | | FTL simulator | `src/Ftl.cc` GC copy-forward path | WAF 2.63 → 1.91 → 1.35 across OP 7/14/28 % | Single seed for the OP sweep |

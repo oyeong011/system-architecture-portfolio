@@ -37,8 +37,10 @@
 물었다. ONNXim에 dequant 비용 모델·K/V 분리 카운터·provenance 로깅을 추가하고
 배분비를 스윕한 결과, **내 제안을 스스로 기각**했다 — 정확히 맞춘 분할조차 공유 대비
 0.7~1.2 % 안쪽이라 하드웨어 값을 못 한다. 대신 찾고 있지 않던 것이 나왔다:
-**W INT4·batch 64에서 KV metadata traffic(26.3 %)이 weight traffic(21.3 %)을 넘는다.**
-payload가 아니라 양자화 장부가 다음 병목 후보다. 작업 중 upstream ONNXim의
+**측정된** FP16·batch 16 분해에 bit-width·batch scaling law를 적용하면, INT4·batch 64에서
+KV metadata가 모델링된 트래픽의 **26.3 %**, weight가 **21.3 %**를 차지할 것으로 예측된다 —
+payload가 아니라 양자화 장부가 다음 병목 후보일 수 있다. **다만 INT4·batch 64 조건 자체는
+시뮬레이션하지 않았다**; 실측이 아니라 후속 검증을 위한 분석적 projection이다. 작업 중 upstream ONNXim의
 **GQA/MHA `kv_head_idx` 매핑 버그**를 발견·수정·보고했다.
 
 ### 2. Queue-Aware FTL Simulator
